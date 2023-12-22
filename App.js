@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Image, ScrollView } from "react-native";
 import axios from "axios";
 import {RIOT_API_KEY} from "@env";
 
@@ -9,6 +9,9 @@ import {RIOT_API_KEY} from "@env";
 console.log(RIOT_API_KEY, "RIOT_API_KEY");
 console.log(process.env)
 
+// const 
+const API_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/13.23.1"
+
 export default function App() {
   const [summonerName, setSummonerName] = React.useState("");
   const [summonerLevel, setSummonerLevel] = React.useState(null);
@@ -16,7 +19,6 @@ export default function App() {
   const [summonerNames, setSummonerNames] = React.useState([]);
   const [championData, setChampionData] = React.useState(null);
   const [playerTeamId, setPlayerTeamId] = React.useState(null);
-  const [enemyTeamId, setEnemyTeamId] = React.useState(null);
 
   React.useEffect(() => {
     fetchChampionData().then((data) => {
@@ -91,7 +93,7 @@ export default function App() {
   };
 
   const fetchChampionData = async () => {
-    const url = `http://ddragon.leagueoflegends.com/cdn/13.24.1/data/en_US/champion.json`;
+    const url = `${API_BASE_URL}/data/en_US/champion.json`;
     try {
       const response = await axios.get(url);
       return response.data.data;
@@ -143,11 +145,11 @@ export default function App() {
       .map((participant, index) => {
         // console.log(participant, "participant")
         return (
-          <View key={index} style={styles.participant}>
+          <View key={index} style={styles.summonerCard}>
             <Image
               style={styles.champimage}
               source={{
-                uri: `http://ddragon.leagueoflegends.com/cdn/13.23.1/img/champion/${
+                uri: `${API_BASE_URL}/img/champion/${
                   getChampionByKey(participant.championId).image.full
                 }`,
               }}
@@ -195,6 +197,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingTop: StatusBar.currentHeight,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
@@ -224,9 +227,16 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 
-  participant: {
+  summonerCard:{
+    padding: 20,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#000",
+    backgroundColor: "#eee",
     marginBottom: 10,
   },
+
+
   teamTitle: {
     fontWeight: "bold",
     textAlign: "center",
