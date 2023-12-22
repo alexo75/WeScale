@@ -7,19 +7,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start", // Adjust as needed
   },
+
   teamsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
   },
+
   team: {
     width: "45%",
   },
+
   thumbcontainer: {
     padding: 20,
   },
+
+
   summonerSpellsSection: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -47,9 +52,8 @@ const styles = StyleSheet.create({
   },
 
   summonerSpells: {
-    width: 15,
-    height: 15,
-    padding: 2,
+    width: 40,
+    height: 40,
     resizeMode: "contain",
   },
 
@@ -59,11 +63,12 @@ const styles = StyleSheet.create({
   },
 
   scroll: {
-    height: "100%",
+    width: "100%",
   },
   
 
   input: {
+    height: 40,
     width: "100%",
     padding: 10,
     marginBottom: 20,

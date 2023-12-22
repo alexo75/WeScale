@@ -1,14 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  Image,
-  ScrollView,
-} from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import axios from "axios";
 import { RIOT_API_KEY } from "@env";
 // import SummonerCard from "./summoner_card";
@@ -121,8 +113,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>League of Legends Stats</Text>
       <ScrollView>
-        <Text style={styles.title}>League of Legends Stats</Text>
         <SearchForm
           value={summonerName}
           onChangeText={setSummonerName}
@@ -132,8 +124,9 @@ export default function App() {
           lastGameStats={lastGameStats}
           getChampionByKey={getChampionByKey}
         />
-        <StatusBar style="auto" />
       </ScrollView>
+
+      <StatusBar style="auto" />
     </View>
   );
 }
