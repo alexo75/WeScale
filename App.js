@@ -1,26 +1,31 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Button, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  Image,
+  ScrollView,
+} from "react-native";
 import axios from "axios";
-import {RIOT_API_KEY} from "@env";
-import SummonerCard from "./summoner_card";
+import { RIOT_API_KEY } from "@env";
+// import SummonerCard from "./summoner_card";
 import styles from "./style_sheet";
 
-// const RIOT_API_KEY = config.RIOT_API_KEY;
-// const RIOT_API_KEY = process.env.RIOT_API_KEY;
-console.log(RIOT_API_KEY, "RIOT_API_KEY");
-console.log(process.env)
+import SearchForm from "./search_form";
+import SearchResults from "./search_results";
 
-// const 
-const API_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/13.23.1"
+console.log(RIOT_API_KEY, "RIOT_API_KEY");
+console.log(process.env);
+
+const API_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/13.23.1";
 
 export default function App() {
   const [summonerName, setSummonerName] = React.useState("");
-  const [summonerLevel, setSummonerLevel] = React.useState(null);
   const [lastGameStats, setLastGameStats] = React.useState(null);
-  const [summonerNames, setSummonerNames] = React.useState([]);
   const [championData, setChampionData] = React.useState(null);
-  const [playerTeamId, setPlayerTeamId] = React.useState(null);
 
   React.useEffect(() => {
     fetchChampionData().then((data) => {
@@ -30,7 +35,7 @@ export default function App() {
     });
   }, []);
 
-  const getSummonerData = async (name) => {
+  const fetchSummonerData = async (name) => {
     const region = "na1";
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURIComponent(
       name
@@ -46,7 +51,7 @@ export default function App() {
     }
   };
 
-  const getLastGameStats = async (puuid) => {
+  const fetchLastGameStatsForSummoner = async (puuid) => {
     const matchListUrl = `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids`;
     try {
       const matchListResponse = await axios.get(matchListUrl, {
@@ -67,7 +72,7 @@ export default function App() {
     }
   };
 
-  const getSummonerDataByPuuid = async (puuid) => {
+  const fetchSummonerDataByPuuid = async (puuid) => {
     const region = "na1";
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${encodeURIComponent(
       puuid
@@ -81,16 +86,6 @@ export default function App() {
       console.error("Error fetching summoner data:", error);
       return null;
     }
-  };
-
-  const mapPuuidsToSummonerNames = async (puuids) => {
-    const summonerNames = await Promise.all(
-      puuids.map(async (puuid) => {
-        const summonerData = await getSummonerDataByPuuid(puuid);
-        return summonerData ? summonerData.name : null;
-      })
-    );
-    return summonerNames;
   };
 
   const fetchChampionData = async () => {
@@ -111,63 +106,34 @@ export default function App() {
     return champion;
   };
 
-  const handleSummonerSearch = async () => {
-    const summonerData = await getSummonerData(summonerName);
+  const handleSummonerSearch = async (name) => {
+    const summonerData = await fetchSummonerData(name);
     if (summonerData) {
-      setSummonerLevel(summonerData.summonerLevel);
-      const gameStats = await getLastGameStats(summonerData.puuid);
+      const gameStats = await fetchLastGameStatsForSummoner(summonerData.puuid);
       if (gameStats) {
         setLastGameStats(gameStats);
-        const names = await mapPuuidsToSummonerNames(
-          gameStats.metadata.participants
-        );
-        setSummonerNames(names);
-        const playerParticipant = gameStats.info.participants.find(
-          (p) => p.summonerName.toLowerCase() === summonerName.toLowerCase()
-        );
-        if (playerParticipant) {
-          setPlayerTeamId(playerParticipant.teamId);
-        }
       }
     } else {
       console.log("Summoner not found");
-      setSummonerLevel(null);
       setLastGameStats(null);
-      setSummonerNames([]);
     }
   };
 
-
-  const renderTeam = (teamId) =>
-    lastGameStats.info.participants
-      .filter((p) => p.teamId === teamId)
-      .map((participant, index) => (<SummonerCard participant={participant} getChampionByKey={getChampionByKey} key={index} />))
-
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        onChangeText={setSummonerName}
-        value={summonerName}
-        placeholder="Enter Summoner Name"
-      />
-      <Button title="Get Summoner Info" onPress={handleSummonerSearch} />
-      {summonerLevel !== null && <Text>Summoner Level: {summonerLevel}</Text>}
-      {lastGameStats && (
-        <View style={styles.teamsContainer}>
-          <View style={styles.team}>
-            <Text style={styles.teamTitle}>Your Team</Text>
-            {renderTeam(100)}
-          </View>
-          <View style={styles.team}>
-            <Text style={styles.teamTitle}>Enemy Team</Text>
-            {renderTeam(200)}
-          </View>
-        </View>
-      )}
-      <StatusBar style="auto" />
+      <ScrollView>
+        <Text style={styles.title}>League of Legends Stats</Text>
+        <SearchForm
+          value={summonerName}
+          onChangeText={setSummonerName}
+          onPress={handleSummonerSearch}
+        />
+        <SearchResults
+          lastGameStats={lastGameStats}
+          getChampionByKey={getChampionByKey}
+        />
+        <StatusBar style="auto" />
+      </ScrollView>
     </View>
   );
 }
-
-
