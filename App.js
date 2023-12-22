@@ -3,6 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button, Image, ScrollView } from "react-native";
 import axios from "axios";
 import {RIOT_API_KEY} from "@env";
+import SummonerCard from "./summoner_card";
+import styles from "./style_sheet";
 
 // const RIOT_API_KEY = config.RIOT_API_KEY;
 // const RIOT_API_KEY = process.env.RIOT_API_KEY;
@@ -23,7 +25,6 @@ export default function App() {
   React.useEffect(() => {
     fetchChampionData().then((data) => {
       if (data) {
-        console.log("setting champ data");
         setChampionData(data);
       }
     });
@@ -104,7 +105,6 @@ export default function App() {
   };
 
   const getChampionByKey = (championKey) => {
-    console.log(championKey, "inside getChampionByKey");
     if (!championData) return "Loading...";
     const champions = Object.values(championData);
     const champion = champions.find((champ) => champ.key == championKey);
@@ -116,8 +116,6 @@ export default function App() {
     if (summonerData) {
       setSummonerLevel(summonerData.summonerLevel);
       const gameStats = await getLastGameStats(summonerData.puuid);
-      console.log(gameStats, "gameStats");
-      console.log(gameStats.info.teams, "gameStats.info.teams");
       if (gameStats) {
         setLastGameStats(gameStats);
         const names = await mapPuuidsToSummonerNames(
@@ -139,33 +137,11 @@ export default function App() {
     }
   };
 
+
   const renderTeam = (teamId) =>
     lastGameStats.info.participants
       .filter((p) => p.teamId === teamId)
-      .map((participant, index) => {
-        // console.log(participant, "participant")
-        return (
-          <View key={index} style={styles.summonerCard}>
-            <Image
-              style={styles.champimage}
-              source={{
-                uri: `${API_BASE_URL}/img/champion/${
-                  getChampionByKey(participant.championId).image.full
-                }`,
-              }}
-            />
-            <Text>Participant: {participant.summonerName}</Text>
-            <Text>
-              Champion: {getChampionByKey(participant.championId).name}
-            </Text>
-            <Text>
-              KDA: {participant.kills} / {participant.deaths} /{" "}
-              {participant.assists}
-            </Text>
-            <Text>Gold Earned: {participant.goldEarned}</Text>
-          </View>
-        );
-      });
+      .map((participant, index) => (<SummonerCard participant={participant} getChampionByKey={getChampionByKey} key={index} />))
 
   return (
     <View style={styles.container}>
@@ -194,58 +170,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    paddingTop: StatusBar.currentHeight,
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  teamsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-  },
-  team: {
-    width: "45%",
-  },
-  thumbcontainer: {
-    padding: 20,
-  },
 
-  thumbnail: {
-    width: 50,
-    height: 50,
-    resizeMode: "contain",
-  },
-
-  champimage: {
-    width: 50,
-    height: 50,
-    resizeMode: "contain",
-  },
-
-  summonerCard:{
-    padding: 20,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#000",
-    backgroundColor: "#eee",
-    marginBottom: 10,
-  },
-
-
-  teamTitle: {
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  input: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "gray",
-  },
-});
