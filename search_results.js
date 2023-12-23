@@ -4,16 +4,19 @@ import SummonerCard from "./summoner_card";
 import styles from "./style_sheet";
 
 function SearchResults(props) {
-  const { lastGameStats, getChampionByKey } = props;
+  const { lastGameStats, getChampionByName } = props;
 
   if (!lastGameStats) return null;
 
-  const enemyTeamParticipants = lastGameStats.info.participants.filter(
+
+  const myTeamParticipants = lastGameStats.info.participants.filter(
     (p) => p.teamId === 100
   );
-  const myTeamParticipants = lastGameStats.info.participants.filter(
+  
+  const enemyTeamParticipants = lastGameStats.info.participants.filter(
     (p) => p.teamId === 200
   );
+
 
 
   return (
@@ -24,7 +27,7 @@ function SearchResults(props) {
           {myTeamParticipants.map((participant, index) => (
             <SummonerCard
               participant={participant}
-              getChampionByKey={getChampionByKey}
+              getChampionByName={getChampionByName}
               key={index}
             />
           ))}
@@ -35,7 +38,7 @@ function SearchResults(props) {
           {enemyTeamParticipants.map((participant, index) => (
             <SummonerCard
               participant={participant}
-              getChampionByKey={getChampionByKey}
+              getChampionByName={getChampionByName}
               key={index}
             />
           ))}

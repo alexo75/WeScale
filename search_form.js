@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style_sheet";
-import { View, TextInput, Button} from "react-native";
+import { View, TextInput, Button, StyleSheet} from "react-native";
 
 function SearchForm({ value, onChangeText, onPress }) {
   return (
