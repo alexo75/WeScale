@@ -8,20 +8,17 @@ function SearchResults(props) {
 
   if (!lastGameStats) return null;
 
-
   const myTeamParticipants = lastGameStats.info.participants.filter(
     (p) => p.teamId === 100
   );
-  
+
   const enemyTeamParticipants = lastGameStats.info.participants.filter(
     (p) => p.teamId === 200
   );
 
-
-
   return (
-    <View style={styles.teamsContainer}>
-      <ScrollView style={styles.scroll}>
+    <View style={styles.container}>
+      <View style={styles.teamsContainer}>
         <View style={styles.team}>
           <Text style={styles.teamTitle}>Your Team</Text>
           {myTeamParticipants.map((participant, index) => (
@@ -43,8 +40,9 @@ function SearchResults(props) {
             />
           ))}
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }
+
 export default SearchResults;

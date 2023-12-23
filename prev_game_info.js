@@ -3,8 +3,6 @@ import { View, ScrollView, Text } from "react-native";
 import styles from "./style_sheet";
 import SearchResults from "./search_results";
 import SearchForm from "./search_form";
-import axios from "axios";
-import { RIOT_API_KEY } from "@env";
 import {
   fetchChampionData,
   fetchSummonerData,
@@ -42,20 +40,17 @@ function PrevGameInfo({ route, navigation }) {
   }, [summonerName]);
 
   // get champion by key
-const getChampionByName = (championName) => {
+  const getChampionByName = (championName) => {
     if (!championData) {
-        console.log("Champion data not yet loaded");
-        return null;
+      console.log("Champion data not yet loaded");
+      return null;
     }
-
-    // console.log("Champion data:", championData);
-
     if (!championData[championName]) {
-        return null;
+      return null;
     }
 
     return championData[championName];
-};
+  };
 
   // allow us to handle new summoner search in the same way as the initial search
   const handleNewSummonerSearch = async (name) => {
@@ -85,20 +80,22 @@ const getChampionByName = (championName) => {
     });
   }, [summonerName]);
 
-
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={styles.title}>Game Information</Text>
-        <SearchForm
-          value={newSearchName}
-          onChangeText={setNewSearchName}
-          onPress={handleNewSummonerSearch}
-        />
-        <SearchResults
-          lastGameStats={lastGameStats}
-          getChampionByName={getChampionByName}
-        />
+        <View style={styles.centeredView}>
+          <SearchForm
+            value={newSearchName}
+            onChangeText={setNewSearchName}
+            onPress={handleNewSummonerSearch}
+          />
+          <Text style={styles.title}>Game Information</Text>
+
+          <SearchResults
+            lastGameStats={lastGameStats}
+            getChampionByName={getChampionByName}
+          />
+        </View>
       </ScrollView>
     </View>
   );

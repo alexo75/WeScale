@@ -66,7 +66,7 @@ const fetchChampionData = async () => {
   }
 };
 
-const API_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/13.23.1";
+const API_BASE_URL = "http://ddragon.leagueoflegends.com/cdn/13.24.1";
 
 export {
   fetchSummonerDataByPuuid,

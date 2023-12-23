@@ -28,19 +28,17 @@ function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeViewContainer}>
-
-    <View style={styles.centeredView}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Enter Summoner Name</Text>
-        <SearchForm
-          value={summonerName}
-          onChangeText={setSummonerName}
-          onPress={handleSummonerSearch}
-        />
+      <View style={styles.centeredView}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Enter Summoner Name</Text>
+          <SearchForm
+            value={summonerName}
+            onChangeText={setSummonerName}
+            onPress={handleSummonerSearch}
+          />
+        </View>
       </View>
-    </View>
     </SafeAreaView>
-
   );
 }
 

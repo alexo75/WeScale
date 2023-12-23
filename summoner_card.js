@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Image, Pressable, Modal } from "react-native";
+import { Text, View, Image, Pressable, Modal, SafeAreaView } from "react-native";
 import styles from "./style_sheet";
 import summonerSpellsData from "./summoner_spells.js";
 import API_BASE_URL from "./config.js";
@@ -27,19 +27,30 @@ function SummonerCard(props) {
   // when a user presses anyuwhere in the card, we should open the modal
   return (
     <Pressable onPress={() => setModalVisible(true)}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <SummonerInfo participant={participant} />
-      </Modal>
-
+      <SafeAreaView style={{ flex: 1 }}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+          }}
+        >
+          <SafeAreaView style={styles.modalSafeArea}>
+            <Pressable
+              style={styles.modalBackground}
+              onPress={() => setModalVisible(false)}
+            >
+              <View style={styles.modalContainer}>
+                <SummonerInfo participant={participant} />
+              </View>
+            </Pressable>
+          </SafeAreaView>
+        </Modal>
+      </SafeAreaView>
       <View style={styles.summonerCard}>
+            <View style={styles.centeredCardView}>
+
         <Image
           style={styles.champimage}
           source={{
@@ -65,6 +76,7 @@ function SummonerCard(props) {
           />
         </View>
       </View>
+    </View>
     </Pressable>
   );
 }

@@ -11,7 +11,7 @@ function SearchForm({ value, onChangeText, onPress }) {
         value={value}
         placeholder="Enter Summoner Name"
       />
-      <Button title="Get Summoner Info" onPress={() => onPress(value)} />
+      <Button title="Search" onPress={() => onPress(value)} />
     </View>
   );
 }

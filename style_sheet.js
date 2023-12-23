@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
   },
+  
+  itemImage: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
+    padding: 5,
+  },
 
   team: {
     width: "45%",
@@ -23,7 +30,6 @@ const styles = StyleSheet.create({
   thumbcontainer: {
     padding: 20,
   },
-
 
   summonerSpellsSection: {
     flexDirection: "row",
@@ -52,8 +58,8 @@ const styles = StyleSheet.create({
   },
 
   summonerSpells: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     resizeMode: "contain",
   },
 
@@ -65,38 +71,57 @@ const styles = StyleSheet.create({
   scroll: {
     width: "100%",
   },
-  
 
   input: {
     height: 40,
-    width: "100%",
+    width: 200, // Specify the desired width here
     padding: 10,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: "red",
+    borderColor: "blue",
   },
 
-    // modal stuff
   safeViewContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+
+  // modal stuff
+  modalSafeArea: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  modalContainer: {
+    width: "90%",
+    height: "75%",
+    backgroundColor: "orange",
+    padding: 20,
+    borderRadius: 10,
+    justifyContent: "center",
   },
 
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 22,
+  },
+
+  centeredCardView: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "cyan",
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -111,22 +136,21 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#2196F3",
   },
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-
+    textAlign: "center",
+    fontWeight: "bold",
+  }
 });
 
 export default styles;
