@@ -2,25 +2,57 @@ import { StyleSheet, StatusBar } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingTop: StatusBar.currentHeight,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "flex-start", // Adjust as needed
+    justifyContent: "flex-start",
+    padding: 20,
+    paddingTop: StatusBar.currentHeight,
   },
 
   teamsContainer: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "100%",
   },
-  
+
   itemImage: {
     width: 50,
     height: 50,
     resizeMode: "contain",
-    padding: 5,
+  },
+
+  modalItemContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+  },
+
+  runeList: {
+    width: "30%",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+  },
+
+  itemsRow: {
+    width: "80%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  
+  seventhItem: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+  },
+
+  singleItemRow: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
   },
 
   team: {
@@ -50,11 +82,11 @@ const styles = StyleSheet.create({
 
   summonerCard: {
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#000",
     backgroundColor: "#eee",
-    marginBottom: 10,
+    marginBottom: 20,
   },
 
   summonerSpells: {
@@ -74,7 +106,7 @@ const styles = StyleSheet.create({
 
   input: {
     height: 40,
-    width: 200, // Specify the desired width here
+    width: 200,
     padding: 10,
     marginBottom: 20,
     borderWidth: 1,
@@ -150,7 +182,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold",
-  }
+  },
 });
 
 export default styles;

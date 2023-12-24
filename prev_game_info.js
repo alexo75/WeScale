@@ -81,8 +81,8 @@ function PrevGameInfo({ route, navigation }) {
   }, [summonerName]);
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <ScrollView horizontal={false}>
+      <View style={styles.container}>
         <View style={styles.centeredView}>
           <SearchForm
             value={newSearchName}
@@ -96,8 +96,8 @@ function PrevGameInfo({ route, navigation }) {
             getChampionByName={getChampionByName}
           />
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 

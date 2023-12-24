@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, Image, Pressable, Modal, SafeAreaView } from "react-native";
 import styles from "./style_sheet";
 import summonerSpellsData from "./summoner_spells.js";
-import API_BASE_URL from "./config.js";
+import { API_BASE_URL } from "./api";
 import SummonerInfo from "./summoner_info_modal.js";
 
 function SummonerCard(props) {
