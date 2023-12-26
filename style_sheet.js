@@ -10,6 +10,12 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
 
+  oswald:{
+    fontFamily: 'Oswald',
+    fontSize: 20,
+    color: '#000',
+  },
+
   teamsContainer: {
     width: "100%",
     flexDirection: "row",
