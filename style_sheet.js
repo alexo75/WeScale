@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   },
 
   oswald:{
+    textAlign: 'center',
     fontFamily: 'Oswald',
     fontSize: 20,
     color: '#000',
