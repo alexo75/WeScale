@@ -3,7 +3,8 @@ import { Text, View, Image } from "react-native";
 import styles from "./style_sheet";
 import { API_BASE_URL } from "./api";
 import items from "./items.json";
-import runes from "./runes.json";
+import RuneCard from "./rune_card";
+import { getRuneInfoById } from "./rune_card";
 
 function SummonerInfo(props) {
   const participant = props.participant;
@@ -25,13 +26,8 @@ function SummonerInfo(props) {
         </Text>
         <Text style={styles.modalText}>Runes:</Text>
         <View style={styles.runeList}>
-          {primaryRunes.map((runeId, index) => (
-            <RunePreview key={index} runeId={runeId} />
-          ))}
-
-          {secondaryRunes.map((runeId, index) => (
-            <RunePreview key={index} runeId={runeId} />
-          ))}
+          <RuneCard runeIds={primaryRunes} title="Primary Runes" />
+          <RuneCard runeIds={secondaryRunes} title="Secondary Runes" />
         </View>
         <View style={styles.itemsRow}>
           <ItemPreview itemId={participant.item0} />
@@ -44,7 +40,6 @@ function SummonerInfo(props) {
           <ItemPreview itemId={participant.item4} />
           <ItemPreview itemId={participant.item5} />
           <View style={styles.seventhItem}>
-            
             {/* Style for the 7th item */}
             <ItemPreview itemId={participant.item6} />
           </View>
@@ -53,7 +48,6 @@ function SummonerInfo(props) {
     </View>
   );
 }
-
 
 function RunePreview({ runeId }) {
   const runeInfo = getRuneInfoById(runeId);
@@ -73,24 +67,6 @@ function RunePreview({ runeId }) {
   );
 }
 
-function getRuneInfoById(runeId) {
-  // console.log("runeId", runeId);
-  for (const style of runes) {
-    for (const slot of style.slots) {
-      for (const rune of slot.runes) {
-        if (rune.id === runeId) {
-          return {
-            name: rune.name,
-            path: rune.icon,
-          };
-        }
-      }
-    }
-  }
-  console.warn(` ${runeId} not found `);
-  return null;
-}
-
 function ItemPreview(props) {
   const itemId = props.itemId;
   const item = items.data[itemId];
@@ -107,7 +83,5 @@ function ItemPreview(props) {
     </View>
   );
 }
-
-
 
 export default SummonerInfo;

@@ -26,8 +26,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeViewContainer}>
-      {/* I want a large section for the app title using oswald font */}
-      <Text style={styles.oswald}>League of Legends Stats</Text>
+      <Text style={styles.oswald}>League of Legends</Text>
       <View style={styles.centeredView}>
         <View style={styles.container}>
           <Text style={styles.title}>Enter Summoner Name</Text>

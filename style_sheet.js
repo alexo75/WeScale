@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
 
-  oswald:{
-    textAlign: 'center',
-    fontFamily: 'Oswald',
+  oswald: {
+    textAlign: "center",
+    fontFamily: "Oswald",
     fontSize: 20,
-    color: '#000',
+    color: "#000",
   },
 
   teamsContainer: {
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  
+
   seventhItem: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
     top: 10,
   },
@@ -180,6 +180,57 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
   },
+  runeCardContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    margin: 5,
+    backgroundColor: "#f0f0f0", // Example background color for the rune card
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
+
+  primaryRuneSection: {
+    backgroundColor: "#e6e6fa", // Light lavender background for primary runes
+    padding: 8,
+    marginVertical: 4,
+    borderRadius: 6,
+    // Other styling properties
+  },
+  secondaryRuneSection: {
+    backgroundColor: "#fff0f5", // Light pink background for secondary runes
+    padding: 8,
+    marginVertical: 4,
+    borderRadius: 6,
+    // Other styling properties
+  },
+
+  runeCard: {
+    backgroundColor: "#FFF", // or any color you want for the card
+    padding: 10,
+    borderRadius: 6,
+    // Add shadow or border styling as needed
+  },
+  runeTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  runeImage: {
+    width: 30, // Set a fixed width
+    height: 30, // Set a fixed height
+    resizeMode: "contain",
+    margin: 2,
+  },
+
   textStyle: {
     color: "white",
     fontWeight: "bold",
