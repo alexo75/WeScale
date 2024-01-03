@@ -17,6 +17,14 @@ const styles = StyleSheet.create({
     color: "#000",
   },
 
+  newake: {
+    textAlign: "center",
+    fontFamily: "Newake",
+    fontSize: 40,
+    color: "#000",
+  },
+
+
   teamsContainer: {
     width: "100%",
     flexDirection: "row",
@@ -241,6 +249,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
+  
 });
 
 export default styles;
