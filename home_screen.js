@@ -4,6 +4,8 @@ import styles from "./style_sheet";
 import SearchForm from "./search_form";
 import { fetchSummonerData, fetchLastGameStatsForSummoner } from "./api";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import GradientText from "./gradient_text";
 
 function HomeScreen({ navigation }) {
   const [summonerName, setSummonerName] = React.useState("");
@@ -25,19 +27,24 @@ function HomeScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safeViewContainer}>
-      <Text style={styles.oswald}>League of Legends</Text>
-      <View style={styles.centeredView}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Enter Summoner Name</Text>
-          <SearchForm
-            value={summonerName}
-            onChangeText={setSummonerName}
-            onPress={handleSummonerSearch}
-          />
+    <LinearGradient
+      colors={["#4c669f", "#722", "#d22"]}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.safeViewContainer}>
+        <GradientText style={styles.newake}>WeScale</GradientText>
+        <View style={styles.centeredView}>
+          <View style={styles.container}>
+            <Text style={styles.title}>Enter Summoner Name</Text>
+            <SearchForm
+              value={summonerName}
+              onChangeText={setSummonerName}
+              onPress={handleSummonerSearch}
+            />
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 

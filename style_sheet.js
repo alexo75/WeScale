@@ -1,4 +1,6 @@
 import { StyleSheet, StatusBar } from "react-native";
+import GradientText from "./gradient_text";
+
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +12,23 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
 
+  title: {
+    fontFamily: 'Newake', // Make sure this matches the actual font name
+    fontSize: 24,
+    color: '#000',
+  },
+
+  gradient: {
+    flex: 1,
+    width: '100%',
+  },
+
+  safeViewContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
+
+  //fonts
   oswald: {
     textAlign: "center",
     fontFamily: "Oswald",
@@ -23,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "#000",
   },
-
+  // end fonts
 
   teamsContainer: {
     width: "100%",
@@ -128,11 +147,6 @@ const styles = StyleSheet.create({
     borderColor: "blue",
   },
 
-  safeViewContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-  },
 
   // modal stuff
   modalSafeArea: {
@@ -194,7 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     margin: 5,
-    backgroundColor: "#f0f0f0", // Example background color for the rune card
+    backgroundColor: "#f0f0f0", 
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: {
@@ -207,25 +221,22 @@ const styles = StyleSheet.create({
   },
 
   primaryRuneSection: {
-    backgroundColor: "#e6e6fa", // Light lavender background for primary runes
+    backgroundColor: "#e6e6fa",
     padding: 8,
     marginVertical: 4,
     borderRadius: 6,
-    // Other styling properties
   },
   secondaryRuneSection: {
-    backgroundColor: "#fff0f5", // Light pink background for secondary runes
+    backgroundColor: "#fff0f5", 
     padding: 8,
     marginVertical: 4,
     borderRadius: 6,
-    // Other styling properties
   },
 
   runeCard: {
-    backgroundColor: "#FFF", // or any color you want for the card
+    backgroundColor: "#FFF",
     padding: 10,
     borderRadius: 6,
-    // Add shadow or border styling as needed
   },
   runeTitle: {
     fontSize: 16,
@@ -233,8 +244,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   runeImage: {
-    width: 30, // Set a fixed width
-    height: 30, // Set a fixed height
+    width: 30,
+    height: 30, 
     resizeMode: "contain",
     margin: 2,
   },
@@ -251,5 +262,6 @@ const styles = StyleSheet.create({
   },
   
 });
+
 
 export default styles;
