@@ -302,6 +302,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
+
+  tooltip:{
+    position: "absolute",
+    backgroundColor: "#121f",
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#000",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: .22,
+    shadowRadius: 2.22,
+    elevation: 5,
+  },
+  tooltipText:{
+    color: "#fff",
+    fontWeight: "bold",
+    fontFamily: "Newake",
+  },
+  
+
 });
 
 export default styles;
