@@ -32,10 +32,10 @@ function HomeScreen({ navigation }) {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.safeViewContainer}>
-        <GradientText style={styles.newake}>WeScale</GradientText>
+      <GradientText style={styles.bigTitle}>WeScale</GradientText>
         <View style={styles.centeredView}>
           <View style={styles.container}>
-            <Text style={styles.title}>Enter Summoner Name</Text>
+            <GradientText style={styles.title}>Enter Summoner Name</GradientText>
             <SearchForm
               value={summonerName}
               onChangeText={setSummonerName}

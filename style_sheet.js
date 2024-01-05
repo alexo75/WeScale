@@ -1,7 +1,6 @@
 import { StyleSheet, StatusBar } from "react-native";
 import GradientText from "./gradient_text";
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,20 +11,27 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
 
-  title: {
-    fontFamily: 'Newake', // Make sure this matches the actual font name
-    fontSize: 24,
-    color: '#000',
+  bigTitle: {
+    fontFamily: "Newake",
+    fontSize: 48,
+    fontWeight: "bold",
   },
+
+  title: {
+    fontFamily: "Newake",
+    fontSize: 24,
+    fontWeight: "bold",
+    flexWrap: "wrap",
+    },
 
   gradient: {
     flex: 1,
-    width: '100%',
+    width: "100%",
   },
 
   safeViewContainer: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
 
   //fonts
@@ -64,29 +70,65 @@ const styles = StyleSheet.create({
   },
 
   runeList: {
-    width: "30%",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-  },
-
-  itemsRow: {
-    width: "80%",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-
-  seventhItem: {
-    position: "absolute",
-    right: 10,
-    top: 10,
-  },
-
-  singleItemRow: {
     width: "100%",
     flexDirection: "row",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+  },
+
+  itemsCardContainer: {
+    backgroundColor: "#FFF", // Card background color
+    borderRadius: 6,
+    padding: 10,
+    marginVertical: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+    flexDirection: "row", // Arrange items in a row
+    flexWrap: "wrap", // Allow items to wrap to next line if needed
+    justifyContent: "center", // Center items within the card
+    alignItems: "center", // Center items vertically
+  },
+  
+  itemCard: {
+    width: 60,
+    height: 60,
+    backgroundColor: "#FFF",
+    borderRadius: 6,
+    padding: 10,
+    margin: 5,
+    alignItems: "center",
     justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
+  itemImage: {
+    width: 40, // Adjust as needed
+    height: 40,
+    resizeMode: "contain",
+  },
+  itemName: {
+    marginTop: 5,
+    fontSize: 12,
+    textAlign: "center",
+  },
+  
+  itemCardPlaceholder: {
+    backgroundColor: "#1e90e0",
+    borderRadius: 6,
+    padding: 10,
+    margin: 5,
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: "#ccc",
   },
 
   team: {
@@ -119,7 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#000",
-    backgroundColor: "#eee",
+    backgroundColor: "#fff",
     marginBottom: 20,
   },
 
@@ -134,6 +176,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
+
   scroll: {
     width: "100%",
   },
@@ -146,7 +189,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "blue",
   },
-
 
   // modal stuff
   modalSafeArea: {
@@ -202,13 +244,13 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: "#2196F3",
   },
+
   runeCardContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     padding: 10,
     margin: 5,
-    backgroundColor: "#f0f0f0", 
+    backgroundColor: "#55f",
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: {
@@ -227,7 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   secondaryRuneSection: {
-    backgroundColor: "#fff0f5", 
+    backgroundColor: "#fff0f5",
     padding: 8,
     marginVertical: 4,
     borderRadius: 6,
@@ -245,7 +287,7 @@ const styles = StyleSheet.create({
   },
   runeImage: {
     width: 30,
-    height: 30, 
+    height: 30,
     resizeMode: "contain",
     margin: 2,
   },
@@ -260,8 +302,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  
 });
-
 
 export default styles;
