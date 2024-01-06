@@ -315,11 +315,13 @@ const styles = StyleSheet.create({
     shadowOpacity: .22,
     shadowRadius: 2.22,
     elevation: 5,
+    zIndex: 1,
   },
   tooltipText:{
     color: "#fff",
     fontWeight: "bold",
     fontFamily: "Newake",
+    flexWrap: 'wrap',
   },
   
 

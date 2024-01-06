@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
-import { View, Image, Text, Pressable } from 'react-native';
-import styles from './style_sheet';
-import runes from './runes.json';
-import Tooltip from './Tooltip';
+import React, { useState } from "react";
+import { View, Image, Text, Pressable, Dimensions } from "react-native";
+import styles from "./style_sheet";
+import runes from "./runes.json";
+import Tooltip from "./tooltip";
+import tooltipPosition from "./tooltip_position";
 
 function RuneCard({ runeIds, title }) {
-  const [tooltipInfo, setTooltipInfo] = useState(null);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({});
 
-  const handlePress = (runeInfo, event) => {
-    const { pageX, pageY } = event.nativeEvent;
-    setTooltipPosition({ top: pageY, left: pageX }); // You might need to adjust this
-    setTooltipInfo(runeInfo.longDesc); // Assuming longDesc holds the detailed info
-    setTooltipVisible(true);
-  };
+  const {
+    tooltipInfo,
+    tooltipVisible,
+    tooltipPosition,
+    setTooltipVisible,
+    handlePress,
+  } = tooltipPosition();
+
+
 
   return (
     <View style={styles.runeCardContainer}>
       <Text style={styles.runeTitle}>{title}</Text>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
         {runeIds.map((runeId, index) => {
           const runeInfo = getRuneInfoById(runeId);
           return (
@@ -29,16 +30,21 @@ function RuneCard({ runeIds, title }) {
               style={styles.runeRow}
             >
               <Image
-                source={{ uri: `http://ddragon.leagueoflegends.com/cdn/img/${runeInfo.path}` }}
+                source={{
+                  uri: `http://ddragon.leagueoflegends.com/cdn/img/${runeInfo.path}`,
+                }}
                 style={styles.runeImage}
               />
-              <Text style={styles.runeName}>{runeInfo.name}</Text>
             </Pressable>
           );
         })}
       </View>
       {tooltipVisible && (
-        <Tooltip info={tooltipInfo} isVisible={tooltipVisible} position={tooltipPosition} />
+        <Tooltip
+          info={tooltipInfo}
+          isVisible={tooltipVisible}
+          position={tooltipPosition}
+        />
       )}
     </View>
   );
@@ -50,13 +56,15 @@ function getRuneInfoById(runeId) {
       for (const rune of slot.runes) {
         if (rune.id === runeId) {
           return {
+            name: rune.name,
             path: rune.icon,
+            longDesc: rune.longDesc,
           };
         }
       }
     }
   }
-  console.warn(` ${runeId} not found `);
+  console.warn(`Rune ID ${runeId} not found`);
   return null;
 }
 

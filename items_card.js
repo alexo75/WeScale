@@ -2,25 +2,36 @@ import React from "react";
 import { View, Image, Text } from "react-native";
 import styles from "./style_sheet";
 import items from "./items.json";
+import Tooltip from "./tooltip";
 
 function ItemPreview({ itemId }) {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({});
   const item = items.data[itemId];
-  if (!item) {
-    return <View style={styles.itemCardPlaceholder} />; // Placeholder for empty slots
-  }
+  
+  const handlePress = (event) => {
+    const { pageX, pageY } = event.nativeEvent;
+    setTooltipPosition({ top: pageY, left: pageX });
+    setTooltipVisible(!tooltipVisible);
+  };
+
+  if (!item) return null;
 
   return (
-    <View style={styles.itemCard}>
-      <Text style={styles.itemTitle}>{title}</Text>
-      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+    <View>
+      <Pressable onPress={handlePress} style={styles.itemCard}>
         <Image
           style={styles.itemImage}
           source={{ uri: `${API_BASE_URL}/img/item/${item.image.full}` }}
         />
-      </View>
+      </Pressable>
+      {tooltipVisible && (
+        <Tooltip info={item.description} isVisible={tooltipVisible} position={tooltipPosition} />
+      )}
     </View>
   );
 }
+
 
 // ItemsCard component that uses ItemPreview
 function ItemsCard({ itemIds, title }) {
