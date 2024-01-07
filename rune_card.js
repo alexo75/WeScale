@@ -3,19 +3,16 @@ import { View, Image, Text, Pressable, Dimensions } from "react-native";
 import styles from "./style_sheet";
 import runes from "./runes.json";
 import Tooltip from "./tooltip";
-import tooltipPosition from "./tooltip_position";
+// import tooltipPosition from "./tooltip_position";
 
 function RuneCard({ runeIds, title }) {
-
   const {
     tooltipInfo,
     tooltipVisible,
     tooltipPosition,
     setTooltipVisible,
-    handlePress,
+    handleTooltipPress,
   } = tooltipPosition();
-
-
 
   return (
     <View style={styles.runeCardContainer}>
@@ -26,7 +23,7 @@ function RuneCard({ runeIds, title }) {
           return (
             <Pressable
               key={index}
-              onPress={(event) => handlePress(runeInfo, event)}
+              onPress={(event) => handleTooltipPress(runeInfo, event)}
               style={styles.runeRow}
             >
               <Image

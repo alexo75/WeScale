@@ -307,6 +307,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#121f",
     padding: 10,
+    width: 150,
+    maxWidth: 200,
+    maxHeight: 300,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#000",
@@ -316,6 +319,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 5,
     zIndex: 1,
+    overflow: 'hidden'
   },
   tooltipText:{
     color: "#fff",

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions } from 'react-native'
 
 //the hooks me boy
 export default function tooltipPosition() {
@@ -21,10 +21,19 @@ export default function tooltipPosition() {
       y = pageY - tooltipHeight;
     }
 
+    console.log('runeInfo:', runeInfo);
+    console.log('event:', event);
+    console.log('x:', x);
+    console.log('y:', y);
+
     setTooltipInfo(runeInfo.longDesc);
     setTooltipVisible(true);
     setTooltipPosition({ top: y, left: x });
   };
+
+  console.log('tooltipInfo:', tooltipInfo);
+  console.log('tooltipVisible:', tooltipVisible);
+  console.log('tooltipPosition:', tooltipPosition);
 
   return {
     tooltipInfo,
