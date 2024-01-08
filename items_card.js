@@ -33,7 +33,7 @@ function ItemPreview({ itemId }) {
 }
 
 
-// ItemsCard component that uses ItemPreview
+
 function ItemsCard({ itemIds, title }) {
   return (
     <View style={styles.itemsCardContainer}>

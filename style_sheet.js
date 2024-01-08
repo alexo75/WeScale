@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
 
+  safeViewContainer: {
+    flex: 1,
+    backgroundColor: "transparent",
+  },
+  
   bigTitle: {
     fontFamily: "Newake",
     fontSize: 48,
@@ -22,7 +27,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     flexWrap: "wrap",
-    },
+    textAlign: "center",
+
+  },
 
   gradient: {
     flex: 1,
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
   },
 
   itemsCardContainer: {
-    backgroundColor: "#FFF", // Card background color
+    backgroundColor: "#FFF",
     borderRadius: 6,
     padding: 10,
     marginVertical: 5,
@@ -86,12 +93,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
-    flexDirection: "row", // Arrange items in a row
-    flexWrap: "wrap", // Allow items to wrap to next line if needed
-    justifyContent: "center", // Center items within the card
-    alignItems: "center", // Center items vertically
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  
+
   itemCard: {
     width: 60,
     height: 60,
@@ -117,7 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: "center",
   },
-  
+
   itemCardPlaceholder: {
     backgroundColor: "#1e90e0",
     borderRadius: 6,
@@ -125,8 +132,8 @@ const styles = StyleSheet.create({
     margin: 5,
     width: 60,
     height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
     borderColor: "#ccc",
   },
@@ -137,6 +144,12 @@ const styles = StyleSheet.create({
 
   thumbcontainer: {
     padding: 20,
+  },
+
+
+  tooltipContainer: {
+    width: 250,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
 
   summonerSpellsSection: {
@@ -175,7 +188,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-
 
   scroll: {
     width: "100%",
@@ -303,7 +315,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  tooltip:{
+  tooltip: {
     position: "absolute",
     backgroundColor: "#121f",
     padding: 10,
@@ -315,20 +327,18 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: .22,
+    shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 5,
     zIndex: 1,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
-  tooltipText:{
+  tooltipText: {
     color: "#fff",
     fontWeight: "bold",
     fontFamily: "Newake",
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
-  
-
 });
 
 export default styles;

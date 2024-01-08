@@ -3,7 +3,7 @@ import { View, Image, Text, Pressable, Dimensions } from "react-native";
 import styles from "./style_sheet";
 import runes from "./runes.json";
 import Tooltip from "./tooltip";
-// import tooltipPosition from "./tooltip_position";
+import tooltipPosition from "./tooltip_position";
 
 function RuneCard({ runeIds, title }) {
   const {
