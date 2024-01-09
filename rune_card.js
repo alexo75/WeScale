@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { View, Image, Text, Pressable, Dimensions } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import styles from "./style_sheet";
 import runes from "./runes.json";
-import Tooltip from "./tooltip";
-import tooltipPosition from "./tooltip_position";
+import { Tooltip } from "react-native-elements";
 
 function RuneCard({ runeIds, title }) {
-  const {
-    tooltipInfo,
-    tooltipVisible,
-    tooltipPosition,
-    setTooltipVisible,
-    handleTooltipPress,
-  } = tooltipPosition();
+  // const [tooltipVisible, setTooltipVisible] = useState(false);
+  // const [selectedRune, setSelectedRune] = useState("");
 
+  // const handleRunePress = (runeDesc) => {
+  //   setSelectedRune(runeDesc);
+  //   setTooltipVisible(!tooltipVisible);
+  // };
   return (
     <View style={styles.runeCardContainer}>
       <Text style={styles.runeTitle}>{title}</Text>
@@ -21,28 +19,24 @@ function RuneCard({ runeIds, title }) {
         {runeIds.map((runeId, index) => {
           const runeInfo = getRuneInfoById(runeId);
           return (
-            <Pressable
+            <Tooltip
               key={index}
-              onPress={(event) => handleTooltipPress(runeInfo, event)}
-              style={styles.runeRow}
+              popover={<Text>Test Tooltip</Text>} // Static test content
+              height={100}
+              width={200}
             >
-              <Image
-                source={{
-                  uri: `http://ddragon.leagueoflegends.com/cdn/img/${runeInfo.path}`,
-                }}
-                style={styles.runeImage}
-              />
-            </Pressable>
+              <TouchableOpacity style={styles.runeRow}>
+                <Image
+                  source={{
+                    uri: `http://ddragon.leagueoflegends.com/cdn/img/${runeInfo.path}`,
+                  }}
+                  style={styles.runeImage}
+                />
+              </TouchableOpacity>
+            </Tooltip>
           );
         })}
       </View>
-      {tooltipVisible && (
-        <Tooltip
-          info={tooltipInfo}
-          isVisible={tooltipVisible}
-          position={tooltipPosition}
-        />
-      )}
     </View>
   );
 }

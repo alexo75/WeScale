@@ -5,6 +5,10 @@ import { API_BASE_URL } from "./api";
 import items from "./items.json";
 import RuneCard from "./rune_card";
 
+
+//TODO address the overlapping pressable issue?
+
+
 function ItemsCard({ participant }) {
   const itemIds = [
     participant.item0,
