@@ -25,6 +25,16 @@ function HomeScreen({ navigation }) {
   const [lastGameStats, setLastGameStats] = React.useState(null);
   const [showTooltip, setShowTooltip] = useState(false);
 
+  //TODO: include a pressable option to show all items from the game
+  //this can use the information from the items.json file
+  // display the items on a separate page or modal
+  //tooltip for each item that displays the item description
+  const handleItems = async () => {
+    console.log("Items pressed - - take us to the item page");
+  }
+
+
+  
   const handleSummonerSearch = async (name) => {
     console.log("Summoner name:", name);
     const summonerData = await fetchSummonerData(name);

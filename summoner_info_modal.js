@@ -9,7 +9,15 @@ import RuneCard from "./rune_card";
 //TODO address the overlapping pressable issue?
 
 
+
 function ItemsCard({ participant }) {
+
+
+  const handlePress = () => {
+    console.log(`Item pressed: ${item.name}`);
+  };
+
+
   const itemIds = [
     participant.item0,
     participant.item1,
@@ -28,6 +36,7 @@ function ItemsCard({ participant }) {
     </View>
   );
 }
+
 
 function ItemPreview({ itemId }) {
   const item = items.data[itemId];
