@@ -9,6 +9,9 @@ function SearchResults(props) {
 
   if (!lastGameStats) return null;
 
+
+  //TODO: make a way to set the searched summoner as "your team"
+  //alternatively, make a way to save it as red vs blue team (prb easier)
   const myTeamParticipants = lastGameStats.info.participants.filter(
     (p) => p.teamId === 100
   );
