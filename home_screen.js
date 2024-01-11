@@ -20,6 +20,10 @@ import { Ionicons } from "@expo/vector-icons";
 //TODO: fix the gradient background for the search section (fix white box in the search section)
 // add a way to select a region for the summoner search
 
+// TODO: add a way to select a region for the summoner search
+// I think I added this to another seciton but wanted to include it here to remind myself
+// probably a simple select option that changes the region in the api call
+
 function HomeScreen({ navigation }) {
   const [summonerName, setSummonerName] = React.useState("");
   const [lastGameStats, setLastGameStats] = React.useState(null);
