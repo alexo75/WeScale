@@ -16,9 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import GradientText from "./gradient_text";
 import { Ionicons } from "@expo/vector-icons";
-
-//TODO: fix the gradient background for the search section (fix white box in the search section)
-// add a way to select a region for the summoner search
+import RNPickerSelect from "react-native-picker-select";
 
 // TODO: add a way to select a region for the summoner search
 // I think I added this to another seciton but wanted to include it here to remind myself
@@ -28,20 +26,20 @@ function HomeScreen({ navigation }) {
   const [summonerName, setSummonerName] = React.useState("");
   const [lastGameStats, setLastGameStats] = React.useState(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [region, setRegion] = useState("na1");
 
   //TODO: include a pressable option to show all items from the game
-  //this can use the information from the items.json file
+  // this can use the information from the items.json file
   // display the items on a separate page or modal
-  //tooltip for each item that displays the item description
-  const handleItems = async () => {
-    console.log("Items pressed - - take us to the item page");
-  }
+  // tooltip for each item that displays the item description
 
+  // const handleItems = async () => {
+  //   console.log("Items pressed - - take us to the item page");
+  // };
 
-  
   const handleSummonerSearch = async (name) => {
     console.log("Summoner name:", name);
-    const summonerData = await fetchSummonerData(name);
+    const summonerData = await fetchSummonerData(name, region);
     if (summonerData) {
       const gameStats = await fetchLastGameStatsForSummoner(summonerData.puuid);
       if (gameStats) {
@@ -56,12 +54,30 @@ function HomeScreen({ navigation }) {
 
   return (
     <LinearGradient
-      colors={["#4c669f", "#722", "#d22"]}
+      colors={["#4c661f", "#722", "#d22"]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.safeViewContainer}>
         <GradientText style={styles.bigTitle}>WeScale</GradientText>
 
+        <RNPickerSelect
+          onValueChange={(value) => setRegion(value)}
+          items={[
+            { label: "North America", value: "na1" },
+            { label: "Europe West", value: "euw1" },
+            { label: "Europe Nordic & East", value: "eun1" },
+            { label: "Korea", value: "kr" },
+            { label: "Japan", value: "jp1" },
+            { label: "Brazil", value: "br1" },
+            { label: "Oceania", value: "oc1" },
+            { label: "Turkey", value: "tr1" },
+            { label: "Russia", value: "ru" },
+            { label: "Latin America North", value: "la1" },
+            { label: "Latin America South", value: "la2" },
+          ]}
+          style={styles.inputIOS}
+          placeholder={{ label: "Select a region", value: null }}
+        />
         <View style={{ position: "absolute", top: 10, right: 10 }}>
           <Tooltip
             popover={

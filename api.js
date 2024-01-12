@@ -18,11 +18,8 @@ const fetchSummonerDataByPuuid = async (puuid) => {
 };
 
 // fetch summoner data (by name)
-const fetchSummonerData = async (name) => {
-  const region = "na1";
-  const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURIComponent(
-    name
-  )}`;
+const fetchSummonerData = async (name, region) => {
+  const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURIComponent(name)}`;
   try {
     const response = await axios.get(url, {
       headers: { "X-Riot-Token": RIOT_API_KEY },
@@ -33,6 +30,7 @@ const fetchSummonerData = async (name) => {
     return null;
   }
 };
+
 
 const fetchLastGameStatsForSummoner = async (puuid) => {
   const matchListUrl = `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids`;
