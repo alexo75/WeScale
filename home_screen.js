@@ -22,6 +22,8 @@ import RNPickerSelect from "react-native-picker-select";
 // I think I added this to another seciton but wanted to include it here to remind myself
 // probably a simple select option that changes the region in the api call
 
+//(later) TODO: eventually we have to move away from summoner names and instead us riot ids
+
 function HomeScreen({ navigation }) {
   const [summonerName, setSummonerName] = React.useState("");
   const [lastGameStats, setLastGameStats] = React.useState(null);
@@ -63,17 +65,17 @@ function HomeScreen({ navigation }) {
         <RNPickerSelect
           onValueChange={(value) => setRegion(value)}
           items={[
-            { label: "North America", value: "na1" },
-            { label: "Europe West", value: "euw1" },
-            { label: "Europe Nordic & East", value: "eun1" },
+            { label: "North America", value: "na" },
+            { label: "Europe West", value: "euw" },
+            { label: "Europe Nordic & East", value: "eun" },
             { label: "Korea", value: "kr" },
             { label: "Japan", value: "jp1" },
             { label: "Brazil", value: "br1" },
             { label: "Oceania", value: "oc1" },
             { label: "Turkey", value: "tr1" },
             { label: "Russia", value: "ru" },
-            { label: "Latin America North", value: "la1" },
-            { label: "Latin America South", value: "la2" },
+            { label: "Latin America North", value: "lan" },
+            { label: "Latin America South", value: "las" },
           ]}
           style={styles.inputIOS}
           placeholder={{ label: "Select a region", value: null }}
