@@ -26,7 +26,6 @@ const fetchSummonerData = async (name, region) => {
     headers: { "X-Riot-Token": RIOT_API_KEY },
   };
 
-  // Log the URL and headers being sent
   console.log(`Requesting Summoner Data: ${url}`);
   console.log(`With headers:`, headers);
 
