@@ -4,33 +4,32 @@ import GradientText from "./gradient_text";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    backgroundColor: "#222",
     alignItems: "center",
     justifyContent: "flex-start",
     padding: 20,
     paddingTop: StatusBar.currentHeight,
   },
 
-
   inputIOS: {
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderRadius: 4,
-    color: 'black',
+    color: "black",
     paddingRight: 30,
   },
-  
+
   inputAndroid: {
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderWidth: 0.5,
-    borderColor: 'purple',
+    borderColor: "purple",
     borderRadius: 8,
-    color: 'black',
+    color: "black",
     paddingRight: 30,
   },
 
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "transparent",
   },
-  
+
   bigTitle: {
     fontFamily: "Newake",
     fontSize: 48,
@@ -51,7 +50,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     flexWrap: "wrap",
     textAlign: "center",
-
   },
 
   gradient: {
@@ -169,10 +167,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
-
   tooltipContainer: {
     width: 250,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
 
   summonerSpellsSection: {
@@ -358,9 +355,28 @@ const styles = StyleSheet.create({
   },
   tooltipText: {
     color: "#fff",
-    fontWeight: "bold",
     fontFamily: "Newake",
     flexWrap: "wrap",
+  },
+  item: {
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 5,
+    borderWidth: 1,
+    borderColor: "#ddd",
+  },
+  itemText: {
+    color: "#233",
+    fontSize: 10,
+    fontWeight: "bold",
+    fontFamily: "Newake",
+    padding: 5,
+  },
+  searchBar: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    margin: 10,
   },
 });
 

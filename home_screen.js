@@ -17,7 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import GradientText from "./gradient_text";
 import { Ionicons } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
-import ItemSearch from "./item_search";
+import ItemSearchScreen from "./item_search_page";
 import items from "./items.json";
 
 // TODO: add a way to select a region for the summoner search
@@ -99,7 +99,7 @@ function HomeScreen({ navigation }) {
         <View style={styles.centeredView}>
           <View style={styles.container}>
             <TouchableOpacity
-              onPress={"./item_search_page.js"}
+              onPress={() => navigation.navigate("ItemSearchScreen")}
               style={styles.itemSearchLink}
             >
               <Text>Search Items</Text>

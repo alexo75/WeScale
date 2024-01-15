@@ -5,11 +5,11 @@ import items from "./items.json";
 import Tooltip from "./tooltip";
 import { Pressable } from "react-native";
 
-function ItemPreview({ itemId }) {
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({});
+function ItemPreview({ itemId, style }) {
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const [tooltipPosition, setTooltipPosition] = React.useState({});
   const item = items.data[itemId];
-  
+
   const handlePress = (event) => {
     const { pageX, pageY } = event.nativeEvent;
     setTooltipPosition({ top: pageY, left: pageX });
@@ -20,42 +20,22 @@ function ItemPreview({ itemId }) {
 
   return (
     <View>
-      <Pressable onPress={handlePress} style={styles.itemCard}>
+      <Pressable onPress={handlePress} style={[styles.itemCard, style]}>
         <Image
           style={styles.itemImage}
           source={{ uri: `${API_BASE_URL}/img/item/${item.image.full}` }}
         />
       </Pressable>
       {tooltipVisible && (
-        <Tooltip info={item.description} isVisible={tooltipVisible} position={tooltipPosition} />
+        <Tooltip
+          info={item.description}
+          isVisible={tooltipVisible}
+          position={tooltipPosition}
+        />
       )}
     </View>
   );
 }
-      const handleOutsidePress = () => {
-        setTooltipVisible(false);
-      };
-
-      return (
-        <View>
-          <Pressable onPress={handleOutsidePress} style={styles.container}>
-            <Pressable onPress={handlePress} style={styles.itemCard}>
-              <Image
-                style={styles.itemImage}
-                source={{ uri: `${API_BASE_URL}/img/item/${item.image.full}` }}
-              />
-            </Pressable>
-          </Pressable>
-          {tooltipVisible && (
-            <Tooltip info={item.description} isVisible={tooltipVisible} position={tooltipPosition} />
-          )}
-        </View>
-      );
-    </View>
-  );
-}
-
-
 
 function ItemsCard({ itemIds, title }) {
   return (
