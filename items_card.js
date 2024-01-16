@@ -1,38 +1,32 @@
-import React from "react";
-import { View, Image, Text } from "react-native";
-import styles from "./style_sheet";
-import items from "./items.json";
-import Tooltip from "./tooltip";
-import { Pressable } from "react-native";
+import React, { useState } from 'react';
+import { View, Image, Text, Pressable } from 'react-native';
+import { Tooltip } from 'react-native-elements'; // Import Tooltip from react-native-elements
+import styles from './style_sheet';
+import items from './items.json';
 
-function ItemPreview({ itemId, style }) {
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
-  const [tooltipPosition, setTooltipPosition] = React.useState({});
+function ItemPreview({ itemId }) {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
   const item = items.data[itemId];
-
-  const handlePress = (event) => {
-    const { pageX, pageY } = event.nativeEvent;
-    setTooltipPosition({ top: pageY, left: pageX });
-    setTooltipVisible(!tooltipVisible);
-  };
 
   if (!item) return null;
 
   return (
-    <View>
-      <Pressable onPress={handlePress} style={[styles.itemCard, style]}>
+    <View style={styles.itemCard}>
+      <Pressable onPress={() => setTooltipVisible(!tooltipVisible)}>
         <Image
           style={styles.itemImage}
           source={{ uri: `${API_BASE_URL}/img/item/${item.image.full}` }}
         />
+        {tooltipVisible && (
+          <Tooltip
+            popover={<Text>{item.description}</Text>}
+            isVisible={tooltipVisible}
+            onOpen={() => setTooltipVisible(false)}
+            height={100}
+            width={200}
+          />
+        )}
       </Pressable>
-      {tooltipVisible && (
-        <Tooltip
-          info={item.description}
-          isVisible={tooltipVisible}
-          position={tooltipPosition}
-        />
-      )}
     </View>
   );
 }

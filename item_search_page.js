@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, Dimensions, TextInput, Image } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Dimensions,
+  TextInput,
+  Image,
+} from "react-native";
 import itemsData from "./items.json";
 import styles from "./style_sheet";
-
 
 const ItemSearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,15 +23,28 @@ const ItemSearchScreen = () => {
   );
 
   const renderItem = ({ item }) => {
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+
     return (
       <View style={[styles.item, { width: itemSize, height: itemSize }]}>
-        <Image
-          style={{ width: 50, height: 50 }} 
-          source={{
-            uri: `http://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${item.image.full}`,
-          }}
-        />
-        <Text style={styles.itemText}>{item.name}</Text>
+        <Pressable onPress={() => setTooltipVisible(!tooltipVisible)}>
+          <Image
+            style={{ width: 50, height: 50 }}
+            source={{
+              uri: `http://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${item.image.full}`,
+            }}
+          />
+          <Text style={styles.itemText}>{item.name}</Text>
+          {tooltipVisible && (
+            <Tooltip
+              popover={<Text>{item.description}</Text>}
+              isVisible={tooltipVisible}
+              onOpen={() => setTooltipVisible(false)}
+              height={100}
+              width={200}
+            />
+          )}
+        </Pressable>
       </View>
     );
   };
