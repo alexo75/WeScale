@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  View,
-  Text,
-  Modal,
-  Pressable,
-  Button,
-  TouchableOpacity,
-} from "react-native";
-import { Tooltip } from "react-native-elements";
+import { Alert, View, Text, Modal, Pressable } from "react-native";
 import styles from "./style_sheet";
 import SearchForm from "./search_form";
-import { fetchSummonerData, fetchLastGameStats } from "./api";
+import { fetchSummonerData, fetchLastGameStatsForSummoner } from "./api";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import GradientText from "./gradient_text";
+import { Tooltip } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
+import RNPickerSelect from "react-native-picker-select";
+import { TouchableOpacity } from "react-native";
+
   
+
+//TODO: fix region picker, I think its still broken...
 
   // main component for home screen
 function HomeScreen({ navigation }) {
@@ -46,7 +47,7 @@ function HomeScreen({ navigation }) {
       <SafeAreaView style={styles.safeViewContainer}>
         <GradientText style={styles.bigTitle}>WeScale</GradientText>
 
-        // region selection picker
+        {/* region selection picker */}
         <RNPickerSelect
           onValueChange={(value) => setRegion(value)}
           items={[
@@ -57,7 +58,8 @@ function HomeScreen({ navigation }) {
           style={styles.inputIOS}
           placeholder={{ label: "Select a region", value: null }}
         />
-        // tooltip for information
+
+        {/*  tooltip for information */}
         <View style={{ position: "absolute", top: 10, right: 10 }}>
           <Tooltip
             popover={<Text style={styles.tooltipText}>Enter summoner/riot name...</Text>}
@@ -67,16 +69,26 @@ function HomeScreen({ navigation }) {
           </Tooltip>
         </View>
 
-        // main content area
+        {/*  main content area */}
         <View style={styles.centeredView}>
           <View style={styles.container}>
-            // link to item search screen
+            {/* link to item search screen */}
             <TouchableOpacity
               onPress={() => navigation.navigate("ItemSearchScreen")}
               style={styles.itemSearchLink}
             >
               <Text>Search Items</Text>
             </TouchableOpacity>
+              
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ChampionRank")}
+              style={styles.itemSearchLink}
+            >
+              <Text>Champion by Time Rank</Text>
+            </TouchableOpacity>
+
+              {/* link to champion search screen */}
+
             <GradientText style={styles.title}>Enter Summoner Name</GradientText>
             <SearchForm
               value={summonerName}

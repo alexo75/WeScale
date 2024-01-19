@@ -1,4 +1,3 @@
-// ItemSearch.js
 import React, { useState } from "react";
 import {
   View,
@@ -8,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import PropTypes from "prop-types";
-import styles from "./style_sheet"; // Import your styles
+import styles from "./style_sheet";
 
 function ItemSearch({ items }) {
   const [searchQuery, setSearchQuery] = useState("");

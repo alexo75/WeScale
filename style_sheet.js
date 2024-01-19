@@ -4,7 +4,7 @@ import GradientText from "./gradient_text";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#222",
+    backgroundColor: "#722",
     alignItems: "center",
     justifyContent: "flex-start",
     padding: 20,
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     flexWrap: "wrap",
     textAlign: "center",
+    color: "#e49"
   },
 
   gradient: {
