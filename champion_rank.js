@@ -40,7 +40,19 @@ const championWinRates = {
     { time: 35, winRate: 55 },
     { time: 40, winRate: 57 },
   ],
+  name: "Yasuo",
+    winRates: [
+        { time: 15, winRate: 53.6 },
+        { time: 20, winRate: 50 },
+        { time: 25, winRate: 50 },
+        { time: 30, winRate: 48.8 },
+        { time: 35, winRate: 46.9 },
+        { time: 40, winRate: 67 },
+    ],
 };
+
+
+
 
 export default function ChampionRank() {
   const [selectedChampion, setSelectedChampion] = useState("Karthus");
