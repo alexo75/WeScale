@@ -20,60 +20,100 @@
 // I'll need to make a new api call for this in some form.
 
 //TODO: name of this file might be a misnomer
-
 import React, { useState } from "react";
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Picker, Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import styles from "./style_sheet";
-import { LinearGradient } from "expo-linear-gradient";
 import championsData from "./champions.json";
-import { Picker } from "@react-native-picker/picker";
-
-//to start unti I sort out the api call I'll just hard code some data
-const championWinRates = {
-  name: "Karthus",
-  winRates: [
-    { time: 15, winRate: 45 },
-    { time: 20, winRate: 47 },
-    { time: 25, winRate: 50 },
-    { time: 30, winRate: 53 },
-    { time: 35, winRate: 55 },
-    { time: 40, winRate: 57 },
-  ],
-  name: "Yasuo",
-    winRates: [
-        { time: 15, winRate: 53.6 },
-        { time: 20, winRate: 50 },
-        { time: 25, winRate: 50 },
-        { time: 30, winRate: 48.8 },
-        { time: 35, winRate: 46.9 },
-        { time: 40, winRate: 67 },
-    ],
-};
-
-
-
 
 export default function ChampionRank() {
-  const [selectedChampion, setSelectedChampion] = useState("Karthus");
-
-const data = {
-    labels: championWinRates.winRates.map(
-        (item) => `${item.time} min`
-    ),
-    datasets: [
-        {
-            data: championWinRates.winRates.map(
-                (item) => item.winRate
-            ),
-        },
+  //to start unti I sort out the api call I'll just hard code some data
+  const championWinRates = {
+    name: "Karthus",
+    winRates: [
+      { time: 15, winRate: 45 },
+      { time: 20, winRate: 47 },
+      { time: 25, winRate: 50 },
+      { time: 30, winRate: 53 },
+      { time: 35, winRate: 55 },
+      { time: 40, winRate: 57 },
     ],
-};
+    name: "Yasuo",
+    winRates: [
+      { time: 15, winRate: 53.6 },
+      { time: 20, winRate: 50 },
+      { time: 25, winRate: 50 },
+      { time: 30, winRate: 48.8 },
+      { time: 35, winRate: 46.9 },
+      { time: 40, winRate: 67 },
+    ],
+  };
+  const [selectedChampion, setSelectedChampion] = useState("Karthus");
+  const [yourTeamChampions, setYourTeamChampions] = useState({
+    champ1: "",
+    champ2: "",
+    champ3: "",
+    champ4: "",
+    champ5: "",
+  });
+  const [enemyTeamChampions, setEnemyTeamChampions] = useState({
+    champ1: "",
+    champ2: "",
+    champ3: "",
+    champ4: "",
+    champ5: "",
+  });
+
+  const renderChampionPicker = (team, setTeam, champKey) => (
+    <Picker
+      selectedValue={team[champKey]}
+      onValueChange={(itemValue) => setTeam({ ...team, [champKey]: itemValue })}
+    >
+      {Object.keys(championsData).map((champion) => (
+        <Picker.Item label={champion} value={champion} key={champion} />
+      ))}
+    </Picker>
+  );
+
+  // this prevents char t from crashing if a team is incomplete (4/5 etc)
+  const chartData =
+    selectedChampion in championsData
+      ? {
+          labels: championsData[selectedChampion].winRates.map(
+            (item) => `${item.time} min`
+          ),
+          datasets: [
+            {
+              data: championsData[selectedChampion].winRates.map(
+                (item) => item.winRate
+              ),
+            },
+          ],
+        }
+      : {
+          labels: [],
+          datasets: [{ data: [] }],
+        };
 
   return (
     <View style={styles.container}>
+      {/* team Selection */}
+      <Text style={styles.title}>Select Your Team Champions</Text>
+      {Object.keys(yourTeamChampions).map((champKey) =>
+        renderChampionPicker(yourTeamChampions, setYourTeamChampions, champKey)
+      )}
+
+      <Text style={styles.title}>Select Enemy Team Champions</Text>
+      {Object.keys(enemyTeamChampions).map((champKey) =>
+        renderChampionPicker(
+          enemyTeamChampions,
+          setEnemyTeamChampions,
+          champKey
+        )
+      )}
+
+      {/* Champion Rank Chart */}
       <Text style={styles.title}>Champion Rank</Text>
-      <Text style={styles.title}>Champion Name: {championWinRates.name}</Text>
       <Picker
         selectedValue={selectedChampion}
         onValueChange={(itemValue) => setSelectedChampion(itemValue)}
@@ -83,31 +123,14 @@ const data = {
         ))}
       </Picker>
       <LineChart
-        data={data}
+        data={chartData}
         width={Dimensions.get("window").width - 16}
         height={220}
         yAxisLabel="%"
         chartConfig={{
-          backgroundColor: "#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#ffa726",
-          decimalPlaces: 1,
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: "#ffa726",
-          },
+          bezier,
         }}
-        bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-        }}
+        style={{ marginVertical: 8, borderRadius: 16 }}
       />
     </View>
   );
