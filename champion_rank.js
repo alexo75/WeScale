@@ -21,12 +21,17 @@
 
 //TODO: name of this file might be a misnomer
 import React, { useState } from "react";
-import { View, Text, Picker, Dimensions } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import styles from "./style_sheet";
 import championsData from "./champions.json";
 
 export default function ChampionRank() {
+  const [yourTeamSearchQuery, setYourTeamSearchQuery] = useState("");
+  const [yourTeamChampions, setYourTeamChampions] = useState([]);
+  const [enemyTeamSearchQuery, setEnemyTeamSearchQuery] = useState("");
+  const [enemyTeamChampions, setEnemyTeamChampions] = useState([]);
+
   //to start unti I sort out the api call I'll just hard code some data
   const championWinRates = {
     name: "Karthus",
@@ -48,90 +53,54 @@ export default function ChampionRank() {
       { time: 40, winRate: 67 },
     ],
   };
-  const [selectedChampion, setSelectedChampion] = useState("Karthus");
-  const [yourTeamChampions, setYourTeamChampions] = useState({
-    champ1: "",
-    champ2: "",
-    champ3: "",
-    champ4: "",
-    champ5: "",
-  });
-  const [enemyTeamChampions, setEnemyTeamChampions] = useState({
-    champ1: "",
-    champ2: "",
-    champ3: "",
-    champ4: "",
-    champ5: "",
-  });
+  const filterChampions = (query) =>
+    Object.keys(championsData).filter((champion) =>
+      champion.toLowerCase().includes(query.toLowerCase())
+    );
 
-  const renderChampionPicker = (team, setTeam, champKey) => (
-    <Picker
-      selectedValue={team[champKey]}
-      onValueChange={(itemValue) => setTeam({ ...team, [champKey]: itemValue })}
-    >
-      {Object.keys(championsData).map((champion) => (
-        <Picker.Item label={champion} value={champion} key={champion} />
-      ))}
-    </Picker>
+  //champion select for eachh team
+  const handleSelectChampion = (team, setTeam, champion, index) => {
+    let updatedTeam = [...team];
+    updatedTeam[index] = champion;
+    setTeam(updatedTeam);
+  };
+
+  // list of champions based on search query
+  const renderChampionList = (query, team, setTeam, index) => (
+    <FlatList
+      data={filterChampions(query)}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          onPress={() => handleSelectChampion(team, setTeam, item, index)}
+        >
+          <Text>{item}</Text>
+        </TouchableOpacity>
+      )}
+      keyExtractor={(item) => item}
+    />
   );
 
-  // this prevents char t from crashing if a team is incomplete (4/5 etc)
-  const chartData =
-    selectedChampion in championsData
-      ? {
-          labels: championsData[selectedChampion].winRates.map(
-            (item) => `${item.time} min`
-          ),
-          datasets: [
-            {
-              data: championsData[selectedChampion].winRates.map(
-                (item) => item.winRate
-              ),
-            },
-          ],
-        }
-      : {
-          labels: [],
-          datasets: [{ data: [] }],
-        };
+  // Render slots for team selection
+  const renderTeamSlots = (team, setTeam, searchQuery, setSearchQuery) =>
+    team.map((champion, index) => (
+      <View key={index}>
+        <Text>Champion Slot {index + 1}: {champion}</Text>
+        <TextInput
+          placeholder="Search Champion"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+        {renderChampionList(searchQuery, team, setTeam, index)}
+      </View>
+    ));
 
   return (
     <View style={styles.container}>
-      {/* team Selection */}
       <Text style={styles.title}>Select Your Team Champions</Text>
-      {Object.keys(yourTeamChampions).map((champKey) =>
-        renderChampionPicker(yourTeamChampions, setYourTeamChampions, champKey)
-      )}
+      {renderTeamSlots(yourTeamChampions, setYourTeamChampions, yourTeamSearchQuery, setYourTeamSearchQuery)}
 
       <Text style={styles.title}>Select Enemy Team Champions</Text>
-      {Object.keys(enemyTeamChampions).map((champKey) =>
-        renderChampionPicker(
-          enemyTeamChampions,
-          setEnemyTeamChampions,
-          champKey
-        )
-      )}
-
-      {/* Champion Rank Chart */}
-      <Text style={styles.title}>Champion Rank</Text>
-      <Picker
-        selectedValue={selectedChampion}
-        onValueChange={(itemValue) => setSelectedChampion(itemValue)}
-      >
-        {Object.keys(championsData).map((champion) => (
-          <Picker.Item label={champion} value={champion} key={champion} />
-        ))}
-      </Picker>
-      <LineChart
-        data={chartData}
-        width={Dimensions.get("window").width - 16}
-        height={220}
-        yAxisLabel="%"
-        chartConfig={{
-          bezier,
-        }}
-        style={{ marginVertical: 8, borderRadius: 16 }}
-      />
+      {renderTeamSlots(enemyTeamChampions, setEnemyTeamChampions, enemyTeamSearchQuery, setEnemyTeamSearchQuery)}
     </View>
   );
 }
