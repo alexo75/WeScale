@@ -65,6 +65,14 @@ export default function ChampionRank() {
     setTeam(updatedTeam);
   };
 
+  // so now we must get the information for each champ
+  // or perhaps we can get the information for each team
+  // 
+
+  //option 1`: attach scores to champion (karthus contains his time-winrate values)
+  //option 2 find winrate values by time ( what are the winrates by time for karthus)
+
+
   // list of champions based on search query
   const renderChampionList = (query, team, setTeam, index) => (
     <FlatList
@@ -80,7 +88,7 @@ export default function ChampionRank() {
     />
   );
 
-  // Render slots for team selection
+  // render slots for team selection
   const renderTeamSlots = (team, setTeam, searchQuery, setSearchQuery) =>
     team.map((champion, index) => (
       <View key={index}>
